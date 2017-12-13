@@ -9,7 +9,8 @@ super_user = User.create(
   first_name: 'Gloria',
   last_name: 'Ding',
   email: 'gd@gmail.com',
-  password: PASSWORD
+  password: PASSWORD,
+  is_admin: true
 )
 
 10.times.each do
@@ -58,4 +59,5 @@ reviews = Review.all
 puts Cowsay.say("Create #{reviews.count} reviews", :moose)
 
 # -------------------------------------------------------------------------
-puts "Login with #{super_user.email} and password of '#{PASSWORD}'!"
+
+puts "Login as admin with #{super_user.email} and password of '#{PASSWORD}'!"

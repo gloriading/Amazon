@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   # this is added afer the method was created in application controller
   before_action :find_product
+  before_action :find_review, :authorize_user!, only: [:destroy]
 
   def create
     # 1 - get new inputs (rating, body) from the new form
@@ -26,7 +27,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find params[:id]
+
     @review.destroy
     redirect_to product_path(@product)
   end
@@ -34,15 +35,25 @@ class ReviewsController < ApplicationController
 
 private
 
-def review_params
-  params.require(:review).permit(:rating, :body)
-end
+  def review_params
+    params.require(:review).permit(:rating, :body)
+  end
 
-def find_product
-  @product = Product.find params[:product_id]
-end
+  def find_product
+    @product = Product.find params[:product_id]
+  end
 
 
+  def find_review # add this (from destroy)
+    @review = Review.find params[:id]
+  end
+
+  def authorize_user! # add find_answer, then add before_action on top
+    unless can?(:manage, @review)
+      flash[:alert] = "Access Denied!"
+      redirect_to home_path
+    end
+  end
 
 
 end

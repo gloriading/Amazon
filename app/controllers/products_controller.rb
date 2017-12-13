@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   # this is added after the method was created in application controller
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  # the below should be put after :find_question
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def new
     @product = Product.new
@@ -18,7 +21,7 @@ class ProductsController < ApplicationController
 
   def show
     # first is to find that row with that id...
-    @product = Product.find params[:id]
+
     @product.price = @product.price.round(2)
     # in the form field, allow decimals:
     # <%= form.number_field :price, step: :any %>
@@ -31,17 +34,17 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find params[:id]
+
     @product.destroy
     redirect_to products_path
   end
 
   def edit
-    @product = Product.find params[:id]
+
   end
 
   def update
-    @product = Product.find params[:id]
+    
     if @product.update(product_params)
       redirect_to product_path(@product)
     else
@@ -51,9 +54,20 @@ class ProductsController < ApplicationController
   end
 
   private
+
   def product_params
     params.require(:product).permit(:title, :description, :price)
   end
 
+  def find_product
+    @product = Product.find params[:id]
+  end
+
+  def authorize_user!
+    unless can?(:manage, @product)
+      flash[:alert] = 'Access Denied!'
+      redirect_to home_path
+    end
+  end
 
 end

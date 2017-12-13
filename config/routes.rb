@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   # Session related route
   resource :session, only: [:new, :create, :destroy]
 
+  # Admin related route
+  namespace :admin do
+    resources :dashboard, only: [:index]
+  end
 
-  
 end
