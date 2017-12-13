@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
+  # this is added after the method was created in application controller
 
   def new
     @product = Product.new
@@ -6,6 +8,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new product_params
+    @product.user = current_user # in order to add username next to the product
     if @product.save
       redirect_to product_path(@product)
     else
@@ -51,5 +54,6 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:title, :description, :price)
   end
+
 
 end

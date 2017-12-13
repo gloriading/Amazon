@@ -18,9 +18,31 @@
     <%= link_to('New Product Form', new_product_path) %>
     ||
     <%= link_to('All Products', products_path) %>
+    ||
+    <% if user_signed_in? %>
+        <span>Hello, <%= current_user.first_name %>!</span>
+        ||
+        <%= link_to(
+          'Sign Out',
+          session_path,
+          method: :delete,
+          data: {confirm: 'Do you really want to sign OUT ?'}
+        ) %>
+
+    <% else %>
+      <%= link_to 'Sign In', new_session_path %>
+      ||
+      <%= link_to 'Sign Up', new_user_path %>
+    <% end %>
+
 
     <hr>
 
+    <% if flash[:notice].present? || flash[:alert].present? %>
+      <div class="flash-message">
+        <p><%= flash[:notice] || flash[:alert] %></p>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>

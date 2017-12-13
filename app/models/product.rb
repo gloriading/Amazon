@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   has_many :reviews, dependent: :destroy
-  
+  belongs_to :user
+
   validate :reserved
   validates(
       :title,

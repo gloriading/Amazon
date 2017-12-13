@@ -1,6 +1,8 @@
 
 <h2><%= @product.title %> </h2>
 <p><%= @product.description %> </p>
+<p>By <%= @product.user&.full_name || "[deleted]" %></p>
+
 <p>price: $ <%= @product.price %> </p>
 <hr>
 <%= link_to 'Edit', edit_product_path(@product) %>
@@ -26,7 +28,7 @@
   <% end %>
 
   <div>
-    Rating: <%= f.number_field :rating , in: 1..5 %> <br />
+    Rating: <%= f.number_field :rating, in: 1..5%> <br />
     Comments: <%= f.text_area :body %>
   </div>
 
@@ -41,6 +43,7 @@
       <div class="review-list-item">
         <p>Rating: <%= review.rating %></p>
         <p>Review: <%= review.body %></p>
+        <p>By <%= review.user&.full_name || "[deleted]" %></p>
         <p>
           <strong>Created At:</strong>
           <%= time_ago_in_words(review.created_at) %> ago
