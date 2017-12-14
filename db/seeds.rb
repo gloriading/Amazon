@@ -49,7 +49,8 @@ products.each do |product|
       rating: rand(1..5),
       body: Faker::TheFreshPrinceOfBelAir.quote,
       product: product,
-      user: users.sample
+      user: users.sample,
+      is_hidden: [true,false].sample
     )
   end
 end

@@ -31,4 +31,6 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
   end
 
+  # product_lists related route
+  resource :product_lists, only: [:show]
 end

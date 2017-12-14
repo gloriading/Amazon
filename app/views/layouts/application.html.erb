@@ -21,10 +21,11 @@
     ||
     <% if user_signed_in? %>
         <span>Hello, <%= current_user.first_name %>!</span>
+        <span> <%= link_to 'Your Products', product_lists_path %></span>
         <% if current_user.is_admin? %>
           ||
           <%= link_to 'Dashboard', admin_dashboard_index_path %>
-          <% end %>
+        <% end %>
         ||
         <%= link_to(
           'Sign Out',
