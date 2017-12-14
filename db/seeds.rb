@@ -50,7 +50,7 @@ products.each do |product|
       body: Faker::TheFreshPrinceOfBelAir.quote,
       product: product,
       user: users.sample,
-      is_hidden: [true,false].sample
+      is_hidden: false
     )
   end
 end

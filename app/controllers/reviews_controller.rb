@@ -2,7 +2,8 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   # this is added afer the method was created in application controller
   before_action :find_product
-  before_action :find_review, :authorize_user!, only: [:destroy]
+  before_action :find_review, :authorize_user!, only: [:destroy, :edit, :update]
+  
 
   def create
     # 1 - get new inputs (rating, body) from the new form
@@ -22,8 +23,6 @@ class ReviewsController < ApplicationController
       render 'products/show'
     end
 
-
-
   end
 
   def destroy
@@ -31,6 +30,21 @@ class ReviewsController < ApplicationController
     @review.destroy
     redirect_to product_path(@product)
   end
+
+  def edit
+    # then to the show page
+   if @review.is_hidden?
+     @review.is_hidden = false
+     @review.save
+     redirect_to product_path(@product)
+   else
+     @review.is_hidden = true
+     @review.save
+     redirect_to product_path(@product)
+   end
+
+  end
+
 
 
 private
