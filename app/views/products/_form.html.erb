@@ -3,20 +3,20 @@
   <% if @product.errors.present? %>
     <p> <%= @product.errors.full_messages.join(', ') %> </p>
   <% end %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="form-group row p-2 bg-info">
+      <%= form.label :title, class: "font-weight-bold text-right col-sm-2" %>
+      <%= form.text_field :title, class: "col-sm-10 form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="form-group row p-2 bg-info">
+    <%= form.label :description, class: "font-weight-bold text-right col-sm-2" %>
+    <%= form.text_area :description, class: "col-sm-10 form-control" %>
   </div>
 
-  <div>
-    <%= form.label :price %>
-    <%= form.number_field :price, step: :any %>
+  <div class="form-group row p-2 bg-info">
+    <%= form.label :price, class: "font-weight-bold text-right col-sm-2" %>
+    <%= form.number_field :price, step: :any, class: "col-sm-10 form-control" %>
   </div>
 
-    <%= form.submit %>
+    <%= form.submit "Submit", class:"btn btn-info float-right" %>
 <% end %>
