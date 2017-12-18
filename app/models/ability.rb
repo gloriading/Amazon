@@ -34,12 +34,13 @@ class Ability
         user == product.user
       end
 
+      # can :manage, Review do |review|
+      #   review.product.user == user
+      # end
+      # #
       can :manage, Review do |review|
         review.user == user
       end
-
-
-
 
 
   end

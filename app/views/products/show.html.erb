@@ -1,5 +1,35 @@
+<div class="card" style="width: 50rem;">
+  <div class="card-header">
+    <%= @product.title %>
+  </div>
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted text-right">By:
+      <%= @product.user&.full_name || "[deleted]" %>
+    </h6>
+    <p class="card-text"><%= @product.description %></p>
+    <p class="card-text text-secondary ">Price: $ <%= @product.price %></p>
 
-<h2><%= @product.title %> </h2>
+    <% if can?(:manage, @product) %>
+
+        <%= link_to(
+             'Edit',
+             edit_product_path(@product),
+             class: "btn btn-outline-secondary"
+             )
+         %>
+        <%= link_to(
+             'Delete',
+             product_path(@product),
+             class: "btn btn-outline-secondary",
+             method: :delete,
+             data: {confirm: 'Are you sure what you are doing now ???'}
+           )
+        %>
+    <% end %>
+  </div>
+</div>
+
+<!-- <h2><%= @product.title %> </h2>
 <p><%= @product.description %> </p>
 <p>By <%= @product.user&.full_name || "[deleted]" %></p>
 
@@ -16,74 +46,92 @@
          data: {confirm: 'Are you sure what you are doing now ???'}
        )
     %>
-<% end %>
+<% end %> -->
 
 <br />
-<br />
-<br />
 
+<%# new review form  ----------------------------------------------------- %>
 
-<hr>
 <%= form_for [@product, @review] do |f| %>
-  <% if @review.errors.present? %>
-    <p>
-      <%= @review.errors.full_messages.join(', ') %>
-    </p>
-  <% end %>
+  <div class="form-group" style="width: 50rem;">
+    <h5>Write a review:</h5>
+    <% if @review.errors.present? %>
+      <p>
+        <%= @review.errors.full_messages.join(', ') %>
+      </p>
+    <% end %>
 
-  <div>
-    Rating: <%= f.number_field :rating, in: 1..5%> <br />
-    Comments: <%= f.text_area :body %>
+    <div>
+      Rating: <%= f.number_field :rating, in: 1..5%> <br />
+    </div>
+
+    <div>
+      Comments: <%= f.text_area :body ,class: "form-control" %>
+    </div>
+    <%= f.submit "Submit Review", class: "btn btn-outline-dark mt-1" %>
   </div>
-
-  <%= f.submit %>
 <% end %>
 
 
-
+<%# reviews ------------------------------------------------------------- %>
 <hr>
 <div>
-    <% @reviews.each do |review| %>
-      <% if review.is_hidden? %>
-      <div style="color:lightgrey">
-        <div>
-          <p><strong>Rating:</strong> <%= review.rating %></p>
-          <p><strong>Reviews:</strong> <%= review.body %></p>
-          <p><strong>User:</strong><%= review.user.full_name %></p>
-          <p><strong>Created At:</strong> <%= time_ago_in_words(review.created_at) %> ago</p>
-          <% if can?(:destroy, review)%>
-            <%= link_to(
-              'Delete',
-              product_review_path(@product, review),
-              data: {confirm: 'Are you sure?'},
-              method: :delete
-            ) %>
-          <% end %>
-          <% if can?(:manage, review) %>
-            <%= link_to 'Hide/ Unhide', edit_product_review_path(@product, review) %>
-          <% end %>
-      </div>
-    </div>
-      <% elsif !review.is_hidden?  %>
+   <% @reviews.each do |review| %>
+     <% if !review.is_hidden? %>
+       <div class="card-body">
+         
+         <p><strong>Rating:</strong> <%= review.rating %></p>
+         <p><strong>Reviews:</strong> <%= review.body %></p>
+         <p><strong>User:</strong><%= review.user.full_name %></p>
+         <p><strong>Created At:</strong> <%= time_ago_in_words(review.created_at) %> ago</p>
 
-          <div>
-            <p><strong>Rating:</strong> <%= review.rating %></p>
-            <p><strong>Reviews:</strong> <%= review.body %></p>
-            <p><strong>User:</strong><%= review.user.full_name %></p>
-            <p><strong>Created At:</strong> <%= time_ago_in_words(review.created_at) %> ago</p>
-            <% if can?(:destroy, review)%>
-              <%= link_to(
-                'Delete',
-                product_review_path(@product, review),
-                data: {confirm: 'Are you sure?'},
-                method: :delete
-              ) %>
-            <% end %>
-            <% if can?(:manage, review) %>
-              <%= link_to 'Hide/ Unhide', edit_product_review_path(@product, review) %>
-            <% end %>
-        </div>
+         <% if can?(:destroy, review)%>
+           <%= link_to(
+             'Delete',
+             product_review_path(@product, review),
+             data: {confirm: 'Are you sure?'},
+             method: :delete
+           ) %>
+         <% end %>
 
-      <% end %>
-    <% end %>
-  </div>
+         <% if can?(:manage, @product)%>
+           <%= form_for [@product, review] do |form| %>
+             <%= form.check_box :is_hidden %>
+             <%= form.submit "Hide/Unhide" %>
+           <% end  %>
+         <% end %>
+
+       </div>
+
+
+     <% else %>
+
+
+       <div class="card-body" style="color:lightgrey;">
+         <p><strong>Rating:</strong> <%= review.rating %></p>
+         <p><strong>Reviews:</strong> <%= review.body %></p>
+         <p><strong>User:</strong><%= review.user.full_name %></p>
+         <p><strong>Created At:</strong> <%= time_ago_in_words(review.created_at) %> ago</p>
+
+         <% if can?(:destroy, review)%>
+           <%= link_to(
+             'Delete',
+             product_review_path(@product, review),
+             data: {confirm: 'Are you sure?'},
+             method: :delete
+           ) %>
+         <% end %>
+
+         <% if can?(:manage, @product)%>
+           <%= form_for [@product, review] do |form| %>
+             <%= form.check_box :is_hidden %>
+             <%= form.submit "Hide/Unhide"%>
+           <% end  %>
+         <% end %>
+
+       </div>
+
+   <% end %> <%# end of if %>
+
+   <% end %>
+ </div>

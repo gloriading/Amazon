@@ -29,7 +29,7 @@ users = User.all
 puts Cowsay.say("Create #{users.count} users", :tux)
 # -------------------------------------------------------------------------
 
-1000.times do
+100.times do
   Product.create(
     title: Faker::Seinfeld.quote,
     description: Faker::HitchhikersGuideToTheGalaxy.quote,

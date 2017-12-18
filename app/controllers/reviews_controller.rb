@@ -2,8 +2,8 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   # this is added afer the method was created in application controller
   before_action :find_product
-  before_action :find_review, :authorize_user!, only: [:destroy, :edit, :update]
-  
+  before_action :find_review, :authorize_user!, only: [:destroy, :update]
+
 
   def create
     # 1 - get new inputs (rating, body) from the new form
@@ -30,27 +30,34 @@ class ReviewsController < ApplicationController
     @review.destroy
     redirect_to product_path(@product)
   end
+  #
+  # def hide
+  #   # then to the show page
+  #  if @review.is_hidden?
+  #    @review.is_hidden = false
+  #    @review.save
+  #    redirect_to product_path(@product)
+  #  else
+  #    @review.is_hidden = true
+  #    @review.save
+  #    redirect_to product_path(@product)
+  #  end
+  #
+  # end
 
-  def edit
-    # then to the show page
-   if @review.is_hidden?
-     @review.is_hidden = false
-     @review.save
-     redirect_to product_path(@product)
-   else
-     @review.is_hidden = true
-     @review.save
-     redirect_to product_path(@product)
-   end
-
+  def update # for hidden function
+      # @review = Review.find params[:id]
+      if @review.update(review_params)
+        redirect_to product_path(@product)
+      else
+        render :edit
+      end
   end
-
-
 
 private
 
-  def review_params
-    params.require(:review).permit(:rating, :body)
+  def review_params # add is_hidden for hidden function
+    params.require(:review).permit(:rating, :body, :is_hidden)
   end
 
   def find_product
@@ -63,7 +70,7 @@ private
   end
 
   def authorize_user! # add find_answer, then add before_action on top
-    unless can?(:manage, @review)
+    unless can?(:manage, @review) || can?(:manage, @product)
       flash[:alert] = "Access Denied!"
       redirect_to home_path
     end

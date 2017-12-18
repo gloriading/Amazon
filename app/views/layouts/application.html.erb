@@ -9,36 +9,65 @@
   </head>
 
   <body>
-    <a href="/"> Home </a>
-    ||
-    <%= link_to('About Us', about_path) %>
-    ||
-    <%= link_to('Contact Us', contact_path) %>
-    ||
-    <%= link_to('New Product Form', new_product_path) %>
-    ||
-    <%= link_to('All Products', products_path) %>
-    ||
-    <% if user_signed_in? %>
-        <span>Hello, <%= current_user.first_name %>!</span>
-        <span> <%= link_to 'Your Products', product_lists_path %></span>
-        <% if current_user.is_admin? %>
-          ||
-          <%= link_to 'Dashboard', admin_dashboard_index_path %>
-        <% end %>
-        ||
-        <%= link_to(
-          'Sign Out',
-          session_path,
-          method: :delete,
-          data: {confirm: 'Do you really want to sign OUT ?'}
-        ) %>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Amazon </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <% else %>
-      <%= link_to 'Sign In', new_session_path %>
-      ||
-      <%= link_to 'Sign Up', new_user_path %>
-    <% end %>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products/new">New Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products">All Products</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control-sm mr-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-secondary btn-sm my-2 my-sm-0 mr-2" type="submit">Go</button>
+        </form>
+
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><%= current_user.first_name %></a>
+            </li>
+            <% if current_user.is_admin? %>
+
+              <li class="nav-item">
+              <%= link_to 'Dashboard', admin_dashboard_index_path, class: "nav-link" %>
+              </li>
+            <% end %>
+
+            <li class="nav-item">
+                <%= link_to(
+                  'Sign Out',
+                  session_path,
+                  class: "nav-link",
+                  method: :delete,
+                  data: {confirm: 'Sign out?'}
+                ) %>
+            </li>
+
+          <% else %>
+            <li class="nav-item">
+                <%= link_to 'Sign In', new_session_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Sign Up', new_user_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
 
 
     <hr>
