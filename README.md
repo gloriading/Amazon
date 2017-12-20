@@ -18,10 +18,15 @@
   (has many reviews)
   - admin
   - authentication
-  - authorization (can only edit and delet their own creation)
+  - authorization (can only edit and delete their own creation)
   - add account management page (user can change its info)
+
+* Others (pending)
+  - home page
+  - about page
+  - contact us page (not functional. add required attribute to 2 tags)
 
 * styling
   - bootstrap4 - all forms
   - add font-awesome gem for icons
-  - add kaminari gem for pagination (not yet)
+  - add kaminari gem for pagination (pending)

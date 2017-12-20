@@ -1,20 +1,18 @@
-<h2>contact us </h2>
+<h3 class="mt-3">Contact Us:</h3>
 
 
 <%= form_tag contact_submit_path do %>
-  <div>
-    <%= label_tag :name %>
-    <%= text_field_tag :name %>
+  <div class="form-group row p-2 bg-info rounded">
+    <%= label_tag :name,nil, class: "font-weight-bold text-right col-sm-2"%>
+    <%= text_field_tag :name, nil, class: "col-sm-10 form-control", required: "true" %>
   </div>
-  <div>
-    <%= label_tag :email %>
-    <%= email_field_tag :email %>
+  <div class="form-group row p-2 bg-info rounded">
+    <%= label_tag :email,nil, class: "font-weight-bold text-right col-sm-2" %>
+    <%= email_field_tag :email, nil, class: "col-sm-10 form-control" %>
   </div>
-  <br>
-  <div>
-    <%= label_tag :message %>
-    <%= text_area_tag :message %>
+  <div class="form-group row p-2 bg-info rounded">
+    <%= label_tag :message,nil, class: "font-weight-bold text-right col-sm-2" %>
+    <%= text_area_tag :message, nil, class: "col-sm-10 form-control",required: "required" %>
   </div>
-  <br>
-    <%= submit_tag 'Contact us' %>
+    <%= submit_tag "Submit", class:"btn btn-info float-right" %>
 <% end %>

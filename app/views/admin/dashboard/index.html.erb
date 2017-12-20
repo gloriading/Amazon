@@ -1,23 +1,26 @@
-<h1>Admin Dashboard</h1>
+<h2 class="mt-2 text-center">Admin Dashboard</h2>
 
-<ul class="list-group">
-  <li class="list-group-item">
+<h5>Statistics:</h5>
+<div class="row text-center">
+  <div class="col-sm-4">
     Number of products:
     <span class="badge badge-info"><%= @number_of_products %></span>
-  </li>
-  <li class="list-group-item">
+  </div>
+  <div class="col-sm-4">
     Number of reviews:
     <span class="badge badge-info"><%= @number_of_reviews %></span>
-  </li>
-  <li class="list-group-item">
+  </div>
+  <div class="col-sm-4">
     Number of users:
     <span class="badge badge-info"><%= @number_of_users %></span>
-  </li>
-</ul>
-<hr>
+  </div>
+</div>
+<br>
 <br>
 
-<table class="table">
+<h5>Product list:</h5>
+<hr>
+<table class="table border border-primary">
   <tbody>
     <tr>
       <th>Product ID</th>
@@ -34,7 +37,9 @@
 
 <hr>
 
-<table class="table">
+<h5>User list:</h5>
+<hr>
+<table class="table border border-primary">
   <tbody>
     <tr>
       <th>ID</th>
