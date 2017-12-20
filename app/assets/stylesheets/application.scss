@@ -13,8 +13,32 @@
  *= require_tree .
  *= require_self
  */
+ body, html {
+     margin: 0;
+     height: 100%;
+ }
+ //
+ // .bg {
+ //     /* The image used */
+ //     background-image: url("http://rongthien.com.vn/wp-content/uploads/2017/03/chuyen-phat-nhanh-hang-hoa-trong-nuoc-rong-thien-660x330.jpg");
+ //
+ //     /* Full height */
+ //     height: 100%;
+ //
+ //     /* Center and scale the image nicely */
+ //     background-position: center;
+ //     background-repeat: no-repeat;
+ //     background-size: cover;
+ // }
+ .bg_welcome {
+  height: 100%;
+   background-image: url("http://rongthien.com.vn/wp-content/uploads/2017/03/chuyen-phat-nhanh-hang-hoa-trong-nuoc-rong-thien-660x330.jpg");
+   background-repeat:no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+ }
 
 
 
-
-@import 'bootstrap'
+@import 'bootstrap';
+@import 'font-awesome';

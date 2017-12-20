@@ -38,6 +38,8 @@ gem 'bootstrap'
 gem 'cancancan'
 gem 'faker', github: 'stympy/faker'
 gem 'cowsay', '~> 0.3.0'
+gem "font-awesome-rails"
+gem "kaminari" # for pagination
 
 
 group :development, :test do

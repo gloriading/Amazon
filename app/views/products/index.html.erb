@@ -1,9 +1,8 @@
 
-<h2>All Products</h2>
-<hr>
-
+<h2 class="mt-2">All Products</h2>
+<p class="text-right"><small><em>Total products: <%= @products_count %> </em></small></p>
 <% @products.each do |product| %>
-  <div class="product-list-item">
-    <%= link_to product.title, product_path(product) %>
+  <div class="list-group">
+    <%= link_to product.title, product_path(product), class: "list-group-item list-group-item-action list-group-item-info mb-1" %>
   </div>
 <% end %>

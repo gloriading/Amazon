@@ -31,6 +31,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all.order(created_at: :desc)
+    @products_count = Product.count
   end
 
   def destroy
@@ -44,7 +45,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    
+
     if @product.update(product_params)
       redirect_to product_path(@product)
     else
