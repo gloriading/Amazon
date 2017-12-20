@@ -21,8 +21,14 @@ Rails.application.routes.draw do
   end
 
   # User related route
-  resources :users, only: [:new, :create]
-
+  # resources :users, only: [:new, :create]
+  resources :users do
+      collection do # use `collection` when add new methods to the existing route
+          get :edit_password
+          patch :update_password
+      end
+  end
+  
   # Session related route
   resource :session, only: [:new, :create, :destroy]
 
@@ -34,7 +40,7 @@ Rails.application.routes.draw do
   # product_lists related route
   resource :product_lists, only: [:show]
 
-  #
+
   # note: this is from Brett
   # resource :reviews, only: [] do
   #   patch :hide

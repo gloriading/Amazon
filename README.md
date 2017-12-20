@@ -16,9 +16,10 @@
 * Users
   (has many products)
   (has many reviews)
+  - admin
   - authentication
   - authorization (can only edit and delet their own creation)
-  - add account management page (not yet)
+  - add account management page (user can change its info)
 
 * styling
   - bootstrap4 - all forms
