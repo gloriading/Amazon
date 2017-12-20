@@ -22,7 +22,7 @@
   - add account management page (user can change its info)
 
 * Others (pending)
-  - home page
+  - home page (Add full-page background but need to fix flash message) <<
   - about page
   - contact us page (not functional. add required attribute to 2 tags)
 

@@ -1,63 +1,66 @@
-<h2 class="mt-2 text-center">Admin Dashboard</h2>
+<div class="container">
+  <h2 class="mt-2 text-center">Admin Dashboard</h2>
 
-<h5>Statistics:</h5>
-<div class="row text-center">
-  <div class="col-sm-4">
-    Number of products:
-    <span class="badge badge-info"><%= @number_of_products %></span>
+  <h5>Statistics:</h5>
+  <div class="row text-center">
+    <div class="col-sm-4">
+      Number of products:
+      <span class="badge badge-info"><%= @number_of_products %></span>
+    </div>
+    <div class="col-sm-4">
+      Number of reviews:
+      <span class="badge badge-info"><%= @number_of_reviews %></span>
+    </div>
+    <div class="col-sm-4">
+      Number of users:
+      <span class="badge badge-info"><%= @number_of_users %></span>
+    </div>
   </div>
-  <div class="col-sm-4">
-    Number of reviews:
-    <span class="badge badge-info"><%= @number_of_reviews %></span>
-  </div>
-  <div class="col-sm-4">
-    Number of users:
-    <span class="badge badge-info"><%= @number_of_users %></span>
-  </div>
+  <br>
+  <br>
+
+  <h5>Product list:</h5>
+  <hr>
+  <table class="table border border-primary">
+    <tbody>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Title</th>
+      </tr>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= link_to product.title, product_path(product) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h5>User list:</h5>
+  <hr>
+  <table class="table border border-primary">
+    <tbody>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+
+      </tr>
+
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.email %></td>
+        </tr>
+      <% end %>
+
+    </tbody>
+
+  </table>
+
 </div>
-<br>
-<br>
-
-<h5>Product list:</h5>
-<hr>
-<table class="table border border-primary">
-  <tbody>
-    <tr>
-      <th>Product ID</th>
-      <th>Product Title</th>
-    </tr>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.id %></td>
-        <td><%= link_to product.title, product_path(product) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<hr>
-
-<h5>User list:</h5>
-<hr>
-<table class="table border border-primary">
-  <tbody>
-    <tr>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-
-    </tr>
-
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.email %></td>
-      </tr>
-    <% end %>
-
-  </tbody>
-
-</table>
