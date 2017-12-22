@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   resources :products do
       resources :reviews# , only: [:create, :destroy]
+      collection do
+        get :search
+      end
   end
 
   # User related route
@@ -28,7 +31,7 @@ Rails.application.routes.draw do
           patch :update_password
       end
   end
-  
+
   # Session related route
   resource :session, only: [:new, :create, :destroy]
 

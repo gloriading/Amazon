@@ -26,6 +26,14 @@
    background-attachment: fixed;
    background-position: center;
  }
+ .bg-about {
+   height: 100%;
+   background-image: url("https://images.pexels.com/photos/346751/pexels-photo-346751.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
+   background-repeat:no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+   background-position: center;
+ }
 
 
 @import 'bootstrap';

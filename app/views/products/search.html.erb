@@ -1,0 +1,11 @@
+<div class="container">
+  <h3 class="mt-2">Search results: </h3>
+  <% if @search_results %>
+    <% @search_results.each do |product| %>
+    <ul class="list-group mb-1">
+      <%= link_to product.title, product_path(product), class: "list-group-item list-group-item-action list-group-item-info" %>
+    </ul>
+    <% end %>
+  <% end %>
+
+</div>

@@ -21,10 +21,11 @@
   - authorization (can only edit and delete their own creation)
   - add account management page (user can change its info)
 
-* Others (pending)
+* Others
   - home page (Add full-page background but need to fix flash message) <<
   - about page
-  - contact us page (not functional. add required attribute to 2 tags)
+  - contact us page (not functional. add required attribute to 2 tags) <<
+  - add search product function
 
 * styling
   - bootstrap4 - all forms

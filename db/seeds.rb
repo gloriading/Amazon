@@ -1,4 +1,4 @@
-PASSWORD = 'happy'
+PASSWORD = '123'
 
 Review.destroy_all
 Product.destroy_all
@@ -13,7 +13,7 @@ super_user = User.create(
   is_admin: true
 )
 
-10.times.each do
+20.times.each do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
 
@@ -31,9 +31,9 @@ puts Cowsay.say("Create #{users.count} users", :tux)
 
 100.times do
   Product.create(
-    title: Faker::Seinfeld.quote,
-    description: Faker::HitchhikersGuideToTheGalaxy.quote,
-    price: rand(1..1000),
+    title: Faker::Dessert.variety,
+    description: Faker::Lorem.paragraphs,
+    price: rand(10..500),
     user: users.sample
   )
 end
@@ -47,7 +47,7 @@ products.each do |product|
   rand(1..5).times.each do
     Review.create(
       rating: rand(1..5),
-      body: Faker::TheFreshPrinceOfBelAir.quote,
+      body: Faker::Simpsons.quote,
       product: product,
       user: users.sample,
       is_hidden: false

@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   # the below should be put after :find_question
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
+#---new product form ----------------------------------------------------------
   def new
     @product = Product.new
   end
@@ -18,10 +19,9 @@ class ProductsController < ApplicationController
       render :new
     end
   end
-
+#---show a product and its reviews---------------------------------------------
   def show
     # first is to find that row with that id...
-
     @product.price = @product.price.round(2)
     # in the form field, allow decimals:
     # <%= form.number_field :price, step: :any %>
@@ -29,17 +29,26 @@ class ProductsController < ApplicationController
     @review = Review.new
   end
 
+#---product index---------------------------------------------------------------
   def index
     @products = Product.all.order(created_at: :desc)
     @products_count = Product.count
+
   end
 
+#---search posts by title or body -------------------------------------------
+  def search
+    @search_results = Product.search(params[:search]) if params[:search].present?
+  end
+
+#---delete a product -----------------------------------------------------------
   def destroy
 
     @product.destroy
     redirect_to products_path
   end
 
+#---edit a product--------------------------------------------------------------
   def edit
 
   end
@@ -53,7 +62,7 @@ class ProductsController < ApplicationController
     end
 
   end
-
+#-------------------------------------------------------------------------------
   private
 
   def product_params
