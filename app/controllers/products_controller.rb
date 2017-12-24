@@ -23,8 +23,7 @@ class ProductsController < ApplicationController
   def show
     # first is to find that row with that id...
     @product.price = @product.price.round(2)
-    # in the form field, allow decimals:
-    # <%= form.number_field :price, step: :any %>
+    # in the form field, allow decimals: <%= form.number_field :price, step: :any %>
     @reviews = @product.reviews.order(created_at: :desc)
     @review = Review.new
   end

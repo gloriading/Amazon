@@ -1,14 +1,20 @@
 <div class="container">
-  <div class="card mt-2">
+  <div class="card mt-2 border border-dark">
     <div class="card-header font-weight-bold">
-      <%= @product.title %>
+      <h5 class="card-title"><%= @product.title%></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><small>
+        updated: <%= time_ago_in_words(@product.updated_at) %> ago
+      </small></h6>
     </div>
     <div class="card-body">
       <h6 class="card-subtitle mb-2 text-muted text-right">By:
         <%= @product.user&.full_name || "[deleted]" %>
       </h6>
       <p class="card-text"><%= @product.description %></p>
-      <p class="card-text text-secondary ">Price: $ <%= @product.price %></p>
+      <p class="card-text text-secondary ">
+        <i class="fa fa-usd" aria-hidden="true"></i>
+        <%= @product.price %>
+      </p>
 
       <% if can?(:manage, @product) %>
 
@@ -54,17 +60,20 @@
   <%# new review form  ----------------------------------------------------- %>
 
   <%= form_for [@product, @review] do |f| %>
-    <div class="form-group" >
+    <div class="form-group p-3 rounded" style="background-color: #b0aac2;">
       <h5>Write a review:</h5>
       <% if @review.errors.present? %>
-        <p>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <%= @review.errors.full_messages.join(', ') %>
-        </p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       <% end %>
 
       <div class="form-group row p-2">
         <%= f.label :rating, class: "text-right col-sm-2" %>
-        <%= f.number_field :rating, class: "col-sm-10 form-control" %>
+        <%= f.number_field :rating, in: 1..5, class: "col-sm-10 form-control" %>
       </div>
       <div class="form-group row p-2">
         <%= f.label :comments, class: "text-right col-sm-2" %>
@@ -72,14 +81,14 @@
 
 
       </div>
-      <%= f.submit "Submit Review", class: "btn btn-outline-secondary btn-sm mt-2" %>
+      <%= f.submit "Submit Review", class: "btn btn-outline-light btn-sm mt-2" %>
     </div>
   <% end %>
 
 
   <%# reviews ------------------------------------------------------------- %>
    <% @reviews.each do |review| %>
-    <div class="card mt-2">
+    <div class="card my-2 border border-dark">
 
        <% if !review.is_hidden? %>
          <div class="card-body">
@@ -92,22 +101,25 @@
              <i class="fa fa-user-o"></i><em>  <%= review.user.full_name %></em></p>
            <p class="text-right"><small>Created At: <%= time_ago_in_words(review.created_at) %> ago</small></p>
 
+           <p>
            <% if can?(:destroy, review)%>
              <%= link_to(
                'Delete',
                product_review_path(@product, review),
                data: {confirm: 'Are you sure?'},
+               class: "btn btn-outline-danger btn-sm",
                method: :delete
              ) %>
            <% end %>
 
            <% if can?(:manage, @product)%>
              <%= form_for [@product, review] do |form| %>
-               <%= form.check_box :is_hidden %>
-               <%= form.submit "Hide/Unhide" %>
+
+               <%= form.check_box :is_hidden, style: "width: 20px; height: 20px;" %>
+               <%= form.submit "Hide/Unhide" , class: "btn btn-outline-primary btn-sm"%>
              <% end  %>
            <% end %>
-
+         </p>
          </div>
     </div>
    <% end %>

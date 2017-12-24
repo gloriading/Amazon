@@ -18,23 +18,26 @@
      height: 100%;
  }
 
- .bg-welcome {
+ .bg-basic {
    height: 100%;
-   background-image: url("https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
    background-repeat:no-repeat;
    background-size: cover;
    background-attachment: fixed;
    background-position: center;
+
+ }
+ .bg-welcome {
+   background-image: url("https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
  }
  .bg-about {
-   height: 100%;
    background-image: url("https://images.pexels.com/photos/346751/pexels-photo-346751.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
-   background-repeat:no-repeat;
-   background-size: cover;
-   background-attachment: fixed;
-   background-position: center;
  }
-
+ .bg-new-product {
+   background-image: url("https://images.pexels.com/photos/730805/pexels-photo-730805.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
+ }
+ .bg-edit-product {
+   background-image: url("https://images.pexels.com/photos/357547/pexels-photo-357547.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
+ }
 
 @import 'bootstrap';
 @import 'font-awesome';

@@ -1,10 +1,28 @@
 <div class="container">
   <h2 class="mt-2">All Products</h2>
   <p class="text-right"><small><em>Total products: <%= @products_count %> </em></small></p>
+
+  <div class="row mt-3">
   <% @products.each do |product| %>
-    <div class="list-group">
-      <%= link_to product.title, product_path(product), class: "list-group-item list-group-item-action list-group-item-info mb-1" %>
+    <div class="col-md-4 card my-1 p-0">
+      <img class="card-img-top" src="https://images.pexels.com/photos/132694/pexels-photo-132694.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" >
+      <div class="card-body">
+        <h4><%= link_to product.title, product_path(product), class: "card-title text-dark" %></h4>
+        <p class="text-right"><small>updated at:<%= time_ago_in_words(product.updated_at) %> ago</small></p>
+        <p class="card-text">
+          <% if product.description.split(' ').length < 20 %>
+            <%= product.description %>
+          <% else %>
+            <%= product.description.split(' ').take(20).join(" ") + " ..." %>
+          <% end %>
+        </p>
+      </div>
+      <div class="card-footer text-muted text-right p-0">
+        $ <%= product.price %>
+      </div>
     </div>
-  <% end %>
+    <% end %>
+
+  </div>
 
 </div>
