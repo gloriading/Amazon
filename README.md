@@ -31,3 +31,11 @@
   - bootstrap4 - all forms
   - add font-awesome gem for icons
   - add kaminari gem for pagination (pending)
+
+* special notes:
+  - in config/application.rb add:
+  ```
+      config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+        html_tag
+      }
+  ```

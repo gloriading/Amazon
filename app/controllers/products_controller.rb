@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  # before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: [:show, :index]
   # this is added after the method was created in application controller
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   # the below should be put after :find_question

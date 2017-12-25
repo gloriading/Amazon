@@ -44,14 +44,42 @@ RSpec.describe Product, type: :model do
     end
 
     it 'must have a price greater than 0' do
-      user = User.create(first_name: 'Jon', last_name: 'Snow',  email: 'j@s.com', password: 'supersecret')
+      user = User.create(first_name: 'Jon', last_name: 'Snow',  email: 'j@s.com')
       p1 = Product.create(title:'unique title', description: 'description blah', price: 0, user: user)
       expect(p1.errors.messages).to have_key(:price)
     end
 
+    it 'has a sale_price which is set to price by default if not present' do
+      user = User.create(first_name: 'Jon', last_name: 'Snow', email: 'j@s.com')
+      p1 = Product.create(title:'unique title', description: 'description blah', user: user)
+      result = p1.sale_price
+      expect(result).to eq(p1.price)
+    end
+
+    it 'has a sale_price that must be less than or equal to price' do
+      user = User.create(first_name: 'Jon', last_name: 'Snow',  email: 'j@s.com')
+      p1 = Product.create(title:'unique title', description: 'description blah', price: 10, sale_price:12, user: user)
+      expect(p1.errors.messages).to have_key(:sale_price)
+    end
+
+
+
   end
 
 #--------------------------------------------------------------------------------
+
+  describe '.on_sale?' do
+    it 'returns true when the product is on sale' do
+      user = User.create(first_name: 'Jon', last_name: 'Snow',  email: 'j@s.com')
+      p1 = Product.create(title:'unique title', description: 'description blah', price: 10, sale_price:9, user: user)
+
+      result = p1.on_sale?
+      expect(result).to eq(true)
+    end
+  end
+
+#--------------------------------------------------------------------------------
+
   describe 'save' do
 
     it 'titleizes title after initialize' do
