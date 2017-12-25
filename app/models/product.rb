@@ -5,9 +5,14 @@ class Product < ApplicationRecord
   validates :title, presence: true, uniqueness: true#, {case_sensitive: false}
 
   validates :price, numericality: {greater_than: 0}
+  validates :sale_price, numericality: {less_than_or_equal_to: :price}
   validates :description, presence: true, length: {minimum: 10}
 
   validate :reserved
+
+  def on_sale?
+    price > sale_price
+  end
 # ----------------------------------------------------------------------lab
 # My solution: class method
   scope :search, -> (key) {
@@ -37,7 +42,7 @@ class Product < ApplicationRecord
   # end
 # -------------------------------------------------------------------------
 
-  after_initialize :set_defaults
+  after_initialize :set_defaults, :sale_price_defaults
   # before_validation :capitalize
   # after_initialize :capitalize
   after_initialize :titleize_title
@@ -54,8 +59,12 @@ class Product < ApplicationRecord
   end
 
   def set_defaults
-    self.price ||= 1
+    self.price ||= 1.0
     # if there's no value, set to 1
+  end
+
+  def sale_price_defaults
+    self.sale_price ||= price
   end
 
   def capitalize

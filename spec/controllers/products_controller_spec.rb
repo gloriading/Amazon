@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pp'
 
 RSpec.describe ProductsController, type: :controller do
 
@@ -48,13 +49,18 @@ RSpec.describe ProductsController, type: :controller do
       it 'createsa new product in the database' do
         count_before = Product.count
         valid_request
+        pp Product.last
         # user = User.create(first_name: 'Jon', last_name: 'Snow', email: 'j@s.com')
         # p1 = Product.create!(
         #                       title:'unique title',
         #                       description: 'description blah',
         #                       price: 300,
         #                       user: user)
+        # pp p1
         count_after = Product.count
+        pp count_after
+        count_after2 = Product.count - 1
+        pp count_after2
         expect(count_before).to eq(count_after - 1)
       end
 
