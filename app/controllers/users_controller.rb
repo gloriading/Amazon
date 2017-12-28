@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-# before_action :authenticate_user!, only: [:edit, :update, :edit_password, :update_password]
+before_action :authenticate_user!, only: [:edit, :update, :edit_password, :update_password]
 
 # sign up page-------------------------------------------------------------
   def new

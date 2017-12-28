@@ -12,8 +12,10 @@
       </h6>
       <p class="card-text"><%= @product.description %></p>
       <p class="card-text text-secondary ">
-        <i class="fa fa-usd"></i>
-        <%= @product.price %>
+        $ <%= @product.price %>
+        <% if @product.on_sale? %>
+            <i class="fa fa-tag text-danger ml-3"></i><span class="text-danger"> $<%= @product.sale_price %></span>
+        <% end %>
       </p>
 
       <% if can?(:manage, @product) %>

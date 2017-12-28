@@ -8,14 +8,7 @@ FactoryBot.define do
   end
 
   factory :product do
-    # title "yeah"
-    # description "ice cream is the best!"
-    # price 200
-    # user_id 132
-    # user_id {User.sample.id}
-    # user {User.order("RANDOM()").first}
-    # association :user, factory: :user
-    user
+    association :user, factory: :user
     sequence(:title) { |n| "#{Faker::Cat.name} - #{n}" }
     description { Faker::Lorem.paragraph }
     price { 10 + rand(1000)}

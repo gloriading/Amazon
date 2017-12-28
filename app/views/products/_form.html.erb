@@ -23,13 +23,13 @@
     <div class="col-md-6">
       <div class="input-group">
         <%= form.label :price, class: "input-group-addon", style: "width:100px;" %>
-        <%= form.number_field :price, step: :any, class: "form-control" %>
+        <%= form.number_field :price, min: 1.0, step: :any, class: "form-control" %>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group">
         <%= form.label :sale_price, class: "input-group-addon", style: "width:100px;" %>
-        <%= form.number_field :sale_price, step: :any, class: "form-control" %>
+        <%= form.number_field :sale_price, min: 1.0, step: :any, class: "form-control" %>
         <span class="input-group-btn">
         <%= form.submit "Submit", class:"btn btn-secondary btn-sm" %>
         </span>

@@ -18,6 +18,9 @@
         </p>
       </div>
       <div class="card-footer text-muted text-right p-0">
+        <% if product.on_sale? %>
+            <i class="fa fa-tag" style="color:red;"></i>    
+        <% end %>
         $ <%= product.price %>
       </div>
     </div>

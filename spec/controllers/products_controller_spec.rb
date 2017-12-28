@@ -29,40 +29,59 @@ RSpec.describe ProductsController, type: :controller do
 
   end
 
-  # describe 'new':
-  # Test in terminal:
-  # > rspec spec/controllers/products_controller_spec.rb
-  # go to products_controller.rb, add a `new method` without anything
-  # go to routes, add resources :products
-  # go to views/campaigns/ , create a new.html.erb
-  # go to products_controller.rb, add `@product = Product.new` to the new method
+#------------------------------------------------------------------------------
+  describe '#show' do
+    # Given: there's a campaign in the database
+    # When: we make a request to show that campaign
+    # Then_1: It renders the show template
+    # Then_2: it assigns an instance variable qual to the shown campaign
+    def valid_request
+      @product = FactoryBot.create(:product)
+      get :show, params: { id: @product.id }
+    end
+
+    it 'renders the show template' do
+      valid_request
+      expect(response).to render_template(:show)
+    end
+
+    it 'assigns an instance variable to campaign whose id is in the params' do
+      valid_request
+      expect(assigns(:product)).to eq(@product)
+    end
+
+  end
 #--------------------------------------------------------------------------
   describe '#create' do
 
     context 'with valid parameters' do
-      def valid_request
-        post :create, params: {
-          product: FactoryBot.attributes_for(:product)
-        }
-      end
+      # def valid_request
+      #   post :create, params: {
+      #     product: FactoryBot.attributes_for(:product)
+      #   }
+      # end
 
-      it 'createsa new product in the database' do
+      it 'creates a new product in the database' do
         count_before = Product.count
         # valid_request
-        user = User.create(first_name: 'Jon', last_name: 'Snow', email: 'j@s.com', password: "123")
-        p1 = Product.create!(
-                              title:'unique title',
-                              description: 'description blah',
-                              price: 300,
-                              user: user)
+        # user = User.create(first_name: 'Jon', last_name: 'Snow', email: 'j@s.com', password: "123")
+        u = FactoryBot.create(:user)
+        post(:create, params: {
+             product: {  title:'superman',
+                         description: 'he is not from here',
+                         price: 300,
+                         user: u
+                       }
+            })
+        pp Product.last
         count_after = Product.count
         expect(count_before).to eq(count_after - 1)
       end
 
-      it 'redirects to the show page of that product' do
-        valid_request
-        expect(response).to redirect_to(product_path(Product.last))
-      end
+      # it 'redirects to the show page of that product' do
+      #   valid_request
+      #   expect(response).to redirect_to(product_path(Product.last))
+      # end
       #
       # it 'sets a flash message' do #C in controller
       #   valid_request

@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   has_many :reviews, dependent: :destroy
   belongs_to :user
 
-  validates :title, presence: true, uniqueness: true#, {case_sensitive: false}
+  validates :title, presence: true, uniqueness: true
 
   validates :price, numericality: { greater_than: 0 }
   validates :sale_price, numericality: { less_than_or_equal_to: :price }
