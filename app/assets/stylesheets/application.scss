@@ -17,7 +17,10 @@
      margin: 0;
      height: 100%;
  }
-
+body{
+  // add this to prevent homepage/about page from scolling
+  padding-bottom: 70px;
+}
  .bg-basic {
    height: 100%;
    background-repeat:no-repeat;
@@ -38,6 +41,12 @@
  .bg-edit-product {
    background-image: url("https://images.pexels.com/photos/357547/pexels-photo-357547.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
  }
-
+.no-t-dec {
+  text-decoration: none !important;
+}
+h4 > a:hover{
+  // background-color: red !important;
+  text-shadow: 1px 1px gray;
+}
 @import 'bootstrap';
 @import 'font-awesome';

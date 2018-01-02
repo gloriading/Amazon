@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all.order(created_at: :desc)
     @products_count = Product.count
-    
+
   end
 
 #---search posts by title or body -------------------------------------------

@@ -64,13 +64,13 @@ RSpec.describe ProductsController, type: :controller do
       it 'creates a new product in the database' do
         count_before = Product.count
         # valid_request
-        # user = User.create(first_name: 'Jon', last_name: 'Snow', email: 'j@s.com', password: "123")
-        u = FactoryBot.create(:user)
+        user = User.create(first_name: 'Jon', last_name: 'Snow', email: 'j@s.com', password: "123")
+        # u = FactoryBot.create(:user)
         post(:create, params: {
              product: {  title:'superman',
                          description: 'he is not from here',
                          price: 300,
-                         user: u
+                         user: user
                        }
             })
         pp Product.last
