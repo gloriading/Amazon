@@ -27,7 +27,6 @@ body{
    background-size: cover;
    background-attachment: fixed;
    background-position: center;
-
  }
  .bg-welcome {
    background-image: url("https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
@@ -45,8 +44,11 @@ body{
   text-decoration: none !important;
 }
 h4 > a:hover{
-  // background-color: red !important;
   text-shadow: 1px 1px gray;
+}
+.form-shape {
+  border-radius: 20px;
+  box-shadow: 3px 5px 20px;
 }
 @import 'bootstrap';
 @import 'font-awesome';
