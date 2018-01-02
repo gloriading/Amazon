@@ -1,11 +1,11 @@
 FactoryBot.define do
 
-  factory :user do
-    first_name "John"
-    last_name  "Doe"
-    email "jd@gmail.com"
-    password "123"
-  end
+  # factory :user do
+  #   first_name "John"
+  #   last_name  "Doe"
+  #   email "jd@gmail.com"
+  #   password "123"
+  # end
 
   factory :product do
     association :user, factory: :user
