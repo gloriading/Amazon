@@ -27,6 +27,8 @@ class ProductsController < ApplicationController
     @reviews = @product.reviews.order(created_at: :desc)
     @review = Review.new
     @user_like = current_user.likes.find_by_product_id(@product) if user_signed_in?
+    @user_favourite = current_user.favourites.find_by_product_id(@product) if user_signed_in?
+
   end
 
 #---product index---------------------------------------------------------------
@@ -35,9 +37,13 @@ class ProductsController < ApplicationController
     @products_count = Product.count
 
     @liked = params[:liked]
-     #this is get from application.html.erb `{liked: true}`
+    @favourited = params[:favourited]
+     #this is get from application.html.erb `{liked: true}` `{favourited: true}`
+
     if @liked
       @products = current_user.liked_products
+    elsif @favourited
+      @products = current_user.favourited_products
     else
       @products = Product.all.order(created_at: :desc)
     end

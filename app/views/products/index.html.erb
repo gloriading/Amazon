@@ -1,5 +1,13 @@
 <div class="container">
-  <h3 class="mt-2"><%= @liked ? 'My Liked Products' : 'All Products' %></h3>
+  <% if @liked %>
+    <h3 class="mt-2">My Liked Products</h3>
+    <% elsif @favourited %>
+      <h3 class="mt-2">My Favourite Products</h3>
+    <% else %>
+      <h3 class="mt-2">All Products</h3>
+  <% end %>
+  <!-- <h3 class="mt-2"><%= @liked ? 'My Liked Products' : 'All Products' %></h3>
+  <h3 class="mt-2"><%= @favourited ? 'My Loved Products' : 'All Products' %></h3> -->
 
   <p class="text-right"><small><em>Total products: <%= @products_count %> </em></small></p>
 

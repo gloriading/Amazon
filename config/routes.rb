@@ -17,12 +17,16 @@ Rails.application.routes.draw do
   # patch('/products/:id', to: 'products#update')
 
   resources :products do
-      resources :reviews# , only: [:create, :destroy]
+      resources :reviews do
+        resources :loves, only: [:create, :destroy], shallow: true
+      end
       resources :likes, only: [:create, :destroy], shallow: true
+      resources :favourites, only: [:create, :destroy], shallow: true
       collection do
         get :search
       end
   end
+
 
   # User related route
   # resources :users, only: [:new, :create]

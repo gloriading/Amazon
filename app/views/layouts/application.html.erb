@@ -34,6 +34,11 @@
               <%= link_to 'Liked Products', products_path({liked: true}), class:"nav-link"  %>
             </li>
           <% end %>
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'Fav Products', products_path({favourited: true}), class:"nav-link"  %>
+            </li>
+          <% end %>
         </ul>
         <%= form_tag search_products_path, method: "get", class: "mt-2" do %>
           <p>

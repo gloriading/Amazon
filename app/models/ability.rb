@@ -47,6 +47,26 @@ class Ability
         product.user != user
       end
 
+      can :crud, Favourite do |favourite|
+        favourite.user == user
+      end
+
+      can :favourite, Product do |product|
+        product.user != user
+      end
+
+
+      can :crud, Love do |love|
+        love.user == user
+      end
+            
+      can :love, Review do |review|
+        review.user != user
+      end
+
+
+
+
   end
 
 end

@@ -1,9 +1,14 @@
 class Product < ApplicationRecord
   has_many :reviews, dependent: :destroy
   belongs_to :user
+
   has_many :likes, dependent: :destroy
-  # has_many :users, through: :likes 
+  # has_many :users, through: :likes
   has_many :likers, through: :likes, source: :user
+
+  has_many :favourites, dependent: :destroy
+  # has_many :users, through: :favourites # or the following
+  has_many :favouriters, through: :favourites, source: :user
 
 
   validates :title, presence: true, uniqueness: true

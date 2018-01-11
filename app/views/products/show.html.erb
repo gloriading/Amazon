@@ -38,12 +38,23 @@
 
       <% if can?(:like, @product) %>
         <% if @user_like %>
-          <%= link_to fa_icon("thumbs-up 2x"), like_path(@user_like), method: :delete %>
+          <%= link_to fa_icon("thumbs-up"), like_path(@user_like), method: :delete %>
         <% else %>
-          <%= link_to fa_icon("thumbs-o-up 2x"), product_likes_path(@product), method: :post %>
+          <%= link_to fa_icon("thumbs-o-up"), product_likes_path(@product), method: :post %>
         <% end %>
       <% end %>
       (<%= pluralize(@product.likes.count, 'like') %>)
+
+<%# FAVOURITE ---------------------------------------------------------------%>
+      <% if can?(:favourite, @product) %>
+        <% if @user_favourite %>
+          <%= link_to fa_icon("heart"), favourite_path(@user_favourite), method: :delete, class: "text-danger" %>
+        <% else %>
+          <%= link_to fa_icon("heart-o"), product_favourites_path(@product), method: :post, class: "text-danger" %>
+        <% end %>
+      <% end %>
+      (<%= pluralize(@product.favourites.count, 'favourite') %>)
+
     </div>
   </div>
 
@@ -133,6 +144,19 @@
                <%= form.submit "Hide/Unhide" , class: "btn btn-outline-primary btn-sm"%>
              <% end  %>
            <% end %>
+
+<%# love a review -----------------------------------------------------------%>
+           <% if can?(:love, review) %>
+              <% if review.loves.find_by_user_id(current_user) %>
+                <%= link_to fa_icon("star"), love_path(review.loves.find_by_user_id(current_user)), method: :delete, class:"text-warning" %>
+
+              <% else %>
+                <%= link_to fa_icon("star-o"), product_review_loves_path(@product, review), method: :post, class:"text-warning"  %>
+              <% end %>
+            <% end %>
+
+
+
          </p>
          </div>
     </div>
