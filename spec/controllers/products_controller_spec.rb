@@ -110,14 +110,9 @@ end
     context 'with user signed in' do
 
       context 'with non-owner signed in' do
-        before do
+        before do # someone signed in but not given authorization
           request.session[:user_id] = user.id
         end
-        # [Authorization]
-        # add gem 'cancancan' to Gemfile
-        # >  rails g cancan:ability
-        # go to app/models/ability.rb
-        # go to campaigns_controller, add `authorize_user!` method
         it 'redirects to the home page' do
           get :edit, params: {id: product.id}
           expect(response).to redirect_to(home_path)
@@ -129,7 +124,7 @@ end
       end
 
       context 'with owner signed in' do
-        before do
+        before do # someone is given authorization 
           request.session[:user_id] = product.user.id
         end
 

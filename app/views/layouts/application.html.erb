@@ -29,6 +29,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/products">All Products</a>
           </li>
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'Liked Products', products_path({liked: true}), class:"nav-link"  %>
+            </li>
+          <% end %>
         </ul>
         <%= form_tag search_products_path, method: "get", class: "mt-2" do %>
           <p>
@@ -91,7 +96,7 @@
          <% end %>
 
        </div>
-       
+
      <%= yield %>
   </body>
 </html>

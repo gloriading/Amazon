@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :products do
       resources :reviews# , only: [:create, :destroy]
+      resources :likes, only: [:create, :destroy], shallow: true
       collection do
         get :search
       end

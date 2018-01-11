@@ -29,19 +29,23 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
+    alias_action :create, :read, :update, :destroy, :to => :crud
 
-      can :manage, Product do |product|
+      can :crud, Product do |product|
         user == product.user
       end
 
-      # can :manage, Review do |review|
-      #   review.product.user == user
-      # end
-      # #
-      can :manage, Review do |review|
+      can :crud, Review do |review|
         review.user == user
       end
 
+      can :crud, Like do |like|
+        like.user == user
+      end
+
+      can :like, Product do |product|
+        product.user != user
+      end
 
   end
 

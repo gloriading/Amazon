@@ -26,12 +26,21 @@ class ProductsController < ApplicationController
     # in the form field, allow decimals: <%= form.number_field :price, step: :any %>
     @reviews = @product.reviews.order(created_at: :desc)
     @review = Review.new
+    @user_like = current_user.likes.find_by_product_id(@product) if user_signed_in?
   end
 
 #---product index---------------------------------------------------------------
   def index
-    @products = Product.all.order(created_at: :desc)
+
     @products_count = Product.count
+
+    @liked = params[:liked]
+     #this is get from application.html.erb `{liked: true}`
+    if @liked
+      @products = current_user.liked_products
+    else
+      @products = Product.all.order(created_at: :desc)
+    end
 
   end
 

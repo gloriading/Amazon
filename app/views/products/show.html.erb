@@ -35,8 +35,20 @@
              )
           %>
       <% end %>
+
+      <% if can?(:like, @product) %>
+        <% if @user_like %>
+          <%= link_to fa_icon("thumbs-up 2x"), like_path(@user_like), method: :delete %>
+        <% else %>
+          <%= link_to fa_icon("thumbs-o-up 2x"), product_likes_path(@product), method: :post %>
+        <% end %>
+      <% end %>
+      (<%= pluralize(@product.likes.count, 'like') %>)
     </div>
   </div>
+
+
+
 
   <!-- <h2><%= @product.title %> </h2>
   <p><%= @product.description %> </p>
