@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
     @review = Review.new
     @user_like = current_user.likes.find_by_product_id(@product) if user_signed_in?
     @user_favourite = current_user.favourites.find_by_product_id(@product) if user_signed_in?
-
+    @user_vote = current_user.votes.find_by_product_id(@product) if user_signed_in?
   end
 
 #---product index---------------------------------------------------------------
@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :sale_price)
+    params.require(:product).permit(:title, :description, :price, :sale_price, { tag_ids: [] })
   end
 
   def find_product
@@ -88,7 +88,7 @@ class ProductsController < ApplicationController
   end
 
   def authorize_user!
-    unless can?(:manage, @product)
+    unless can?(:crud, @product)
       flash[:alert] = 'Access Denied!'
       redirect_to home_path
     end

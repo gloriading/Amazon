@@ -1,4 +1,10 @@
 class Product < ApplicationRecord
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
+
   has_many :reviews, dependent: :destroy
   belongs_to :user
 
@@ -50,6 +56,9 @@ class Product < ApplicationRecord
   #   titles+descriptions
   # end
 # -------------------------------------------------------------------------
+  def votes_result
+    votes.where({ is_up: true }).count - votes.where({ is_up: false }).count
+  end
 
   after_initialize :set_defaults, :sale_price_defaults
   after_initialize :titleize_title

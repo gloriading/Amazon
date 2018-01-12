@@ -2,6 +2,9 @@
   <div class="card mt-2 border border-dark">
     <div class="card-header font-weight-bold">
       <h5 class="card-title"><%= @product.title%></h5>
+      <small>
+        <strong>Tags:</strong> <%= @product.tags.map(&:name).join(', ') %>
+      </small>
       <h6 class="card-subtitle mb-2 text-muted"><small>
         updated: <%= time_ago_in_words(@product.updated_at) %> ago
       </small></h6>
@@ -18,7 +21,7 @@
         <% end %>
       </p>
 
-      <% if can?(:manage, @product) %>
+      <% if can?(:crud, @product) %>
 
           <%= link_to(
                'Edit',
@@ -45,6 +48,8 @@
       <% end %>
       (<%= pluralize(@product.likes.count, 'like') %>)
 
+
+
 <%# FAVOURITE ---------------------------------------------------------------%>
       <% if can?(:favourite, @product) %>
         <% if @user_favourite %>
@@ -55,9 +60,10 @@
       <% end %>
       (<%= pluralize(@product.favourites.count, 'favourite') %>)
 
+<%# VOTE ---------------------------------------------------------------%>
+        <%= product_vote(@user_vote, @product).html_safe if user_signed_in? %>
     </div>
   </div>
-
 
 
 
@@ -137,7 +143,7 @@
              ) %>
            <% end %>
 
-           <% if can?(:manage, @product)%>
+           <% if can?(:crud, @product)%>
              <%= form_for [@product, review] do |form| %>
 
                <%= form.check_box :is_hidden, style: "width: 20px; height: 20px;" %>

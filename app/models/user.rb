@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :loves, dependent: :destroy
   has_many :loved_reviews, through: :loves, source: :review
 
+  has_many :votes, dependent: :destroy
+  has_many :voted_products, through: :votes, source: :product
 
   has_secure_password
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

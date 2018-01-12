@@ -70,7 +70,7 @@ private
   end
 
   def authorize_user! # add find_answer, then add before_action on top
-    unless can?(:manage, @review) || can?(:manage, @product)
+    unless can?(:crud, @review) || can?(:crud, @product)
       flash[:alert] = "Access Denied!"
       redirect_to home_path
     end
