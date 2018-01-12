@@ -2,9 +2,11 @@
   <div class="card mt-2 border border-dark">
     <div class="card-header font-weight-bold">
       <h5 class="card-title"><%= @product.title%></h5>
+<%# product tag ----------------------------------------------------------%>
       <small>
         <strong>Tags:</strong> <%= @product.tags.map(&:name).join(', ') %>
       </small>
+<%# -----------------------------------------------------------------%>
       <h6 class="card-subtitle mb-2 text-muted"><small>
         updated: <%= time_ago_in_words(@product.updated_at) %> ago
       </small></h6>
@@ -61,10 +63,12 @@
       (<%= pluralize(@product.favourites.count, 'favourite') %>)
 
 <%# VOTE ---------------------------------------------------------------%>
+        <p class="text-right">
         <%= product_vote(@user_vote, @product).html_safe if user_signed_in? %>
+        </p>
     </div>
   </div>
-
+<%# --------------------------------------------------------------------%>
 
 
   <!-- <h2><%= @product.title %> </h2>
