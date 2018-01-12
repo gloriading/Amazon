@@ -59,12 +59,15 @@ class Ability
       can :crud, Love do |love|
         love.user == user
       end
-            
+
       can :love, Review do |review|
         review.user != user
       end
 
-
+      can :review_vote, Review do |review|
+        review.user != user || (review.product.user == user && review.user != user)
+      end
+      # user who own the review cannot vote on its review 
 
 
   end

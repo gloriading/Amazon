@@ -4,7 +4,10 @@
       <h5 class="card-title"><%= @product.title%></h5>
 <%# product tag ----------------------------------------------------------%>
       <small>
-        <strong>Tags:</strong> <%= @product.tags.map(&:name).join(', ') %>
+        <strong>Tags:</strong>
+        <% @product.tags.each do |tag| %>
+          <%= link_to tag.name, tag_path(tag) %>
+        <% end %>
       </small>
 <%# -----------------------------------------------------------------%>
       <h6 class="card-subtitle mb-2 text-muted"><small>
@@ -165,6 +168,15 @@
               <% end %>
             <% end %>
 
+<%# --VOTE a review ----------------------------------------------------------%>
+<% if can?(:review_vote, review) %>
+    <% user_review_vote = current_user.review_votes.find_by_review_id(review) %>
+    <%= review_vote(user_review_vote, review).html_safe if user_signed_in? %>
+  <%else %>
+    <span class="badge badge-primary">
+        Your votes: <%= review.review_votes_result %>
+    </span>
+<% end %>
 
 
          </p>

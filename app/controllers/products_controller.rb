@@ -24,7 +24,10 @@ class ProductsController < ApplicationController
     # first is to find that row with that id...
     @product.price = @product.price.round(2)
     # in the form field, allow decimals: <%= form.number_field :price, step: :any %>
-    @reviews = @product.reviews.order(created_at: :desc)
+
+    # @reviews = @product.reviews.order(created_at: :desc)
+    @reviews = @product.reviews.sort{|b, a| a.review_votes_result <=> b.review_votes_result} # sort by total # of votes desc
+
     @review = Review.new
     @user_like = current_user.likes.find_by_product_id(@product) if user_signed_in?
     @user_favourite = current_user.favourites.find_by_product_id(@product) if user_signed_in?

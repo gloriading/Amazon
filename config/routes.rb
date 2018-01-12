@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # get 'tags/index'
+  get('/tags/', to: 'tags#index')
+  # get 'tags/show'
+  get('/tags/:id', to: 'tags#show', as: :tag)
+
   get('/', {to: 'welcome#index', as: :home})
   get('/about', {to: 'welcome#about'})
 
@@ -20,6 +25,9 @@ Rails.application.routes.draw do
       resources :reviews do
         resources :loves, only: [:create, :destroy], shallow: true
       end
+      resources :reviews, only: [], shallow: true do 
+        resources :review_votes, only: [:create, :update, :destroy], shallow: true
+      end
       resources :likes, only: [:create, :destroy], shallow: true
       resources :favourites, only: [:create, :destroy], shallow: true
       collection do
@@ -27,6 +35,7 @@ Rails.application.routes.draw do
       end
       resources :votes, only: [:create, :update, :destroy], shallow: true
   end
+
 
 
   # User related route

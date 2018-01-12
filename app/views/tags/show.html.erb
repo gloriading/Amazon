@@ -1,0 +1,8 @@
+<div class="container">
+
+    <h3 class="mt-2"><%= @tag.name %></h3>
+    <% @products.each do |p| %>
+    <p><%= link_to p.title, product_path(p) %></p>
+
+    <% end %>
+</div>
