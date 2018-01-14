@@ -13,13 +13,18 @@
       <%= form.label :product, class: "input-group-addon", style: "width:100px;" %>
       <%= form.text_field :title, class: "form-control", required: "required" %>
   </div>
-
-  <div class="">
-    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |box| %>
-       <span class='mr-1'><%= box.check_box %></span>
-       <%= box.label %>
-   <% end %>
-
+  <div class="mb-1">
+      <%= form.collection_select(
+        :tag_ids,
+        Tag.order(:name),
+        :id,
+        :name,
+        {},
+        {
+          multiple: true,
+          class: 'form-control chosen-select'
+        }
+      ) %>
   </div>
 
   <div class="input-group mb-1">

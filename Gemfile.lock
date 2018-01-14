@@ -57,6 +57,10 @@ GEM
     builder (3.2.3)
     byebug (9.1.0)
     cancancan (2.1.2)
+    chosen-rails (1.8.2)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -231,6 +235,7 @@ DEPENDENCIES
   bootstrap
   byebug
   cancancan
+  chosen-rails
   coffee-rails (~> 4.2)
   cowsay (~> 0.3.0)
   factory_bot_rails

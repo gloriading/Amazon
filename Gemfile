@@ -40,7 +40,7 @@ gem 'faker', github: 'stympy/faker'
 gem 'cowsay', '~> 0.3.0'
 gem "font-awesome-rails"
 gem "kaminari" # for pagination
-
+gem 'chosen-rails'
 
 group :development, :test do
   gem 'rails-controller-testing'
