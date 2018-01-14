@@ -1,0 +1,12 @@
+<h3>Hello, <%= @product.user.full_name %> !</h3>
+<p>Thank you for creating a new product.</p>
+<p>Here's your product information:</p>
+<p><b>Title:</b> <%= @product.title %> </p>
+<p><b>Tags:</b> <%= @product.tags.map(&:name).join(', ') %></p>
+<p><b>Description:</b> <%= @product.description %></p>
+<p><b>Price:</b> <%=@product.price %></p>
+
+  <%= link_to 'Click here to view your product', product_url(@product) %>
+
+<p>Regards,</p>
+<p>Amazon Team</p>

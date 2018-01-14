@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  match "/delayed_job", to: DelayedJobWeb, anchor: false, via: [:get, :post]
+  
   # get 'tags/index'
   get('/tags/', to: 'tags#index')
   # get 'tags/show'
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
       resources :reviews do
         resources :loves, only: [:create, :destroy], shallow: true
       end
-      resources :reviews, only: [], shallow: true do 
+      resources :reviews, only: [], shallow: true do
         resources :review_votes, only: [:create, :update, :destroy], shallow: true
       end
       resources :likes, only: [:create, :destroy], shallow: true

@@ -14,6 +14,11 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
     @product.user = current_user # in order to add username next to the product
     if @product.save
+      # ProductMailer.notify_product_owner(@product).deliver_now
+      #--[JOB]-----------------------------------------------------
+      ProductCreateReminderJob.set(wait:10.seconds).perform_later
+      # ProductCreateReminderJob.perform_now
+      #------------------------------------------------------------
       redirect_to product_path(@product)
     else
       render :new

@@ -17,6 +17,11 @@ class ReviewsController < ApplicationController
      # in order to add username next to the review, order matters!!!!!!!
 
     if @review.save
+      # ReviewMailer.notify_product_owner(@review).deliver_now
+      #--[JOB]----------------------------------------------------------
+      ReviewCreateReminderJob.set(wait:10.seconds).perform_later
+      # ReviewCreateReminderJob.perform_now
+      #-----------------------------------------------------------------
       redirect_to product_path(@product)
     else
       @reviews = @product.reviews.order(created_at: :desc)
