@@ -56,6 +56,13 @@ class ProductsController < ApplicationController
       @products = Product.all.order(created_at: :desc)
     end
 
+    respond_to do |format|
+        format.html { render }
+        format.json { render json: @products}
+         # go to http://localhost:3000/products.json to show all the data
+        format.xml { render xml: @products}
+    end
+
   end
 
 #---search posts by title or body -------------------------------------------

@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 gem 'bootstrap'
+gem 'faraday'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -43,6 +44,7 @@ gem 'cowsay', '~> 0.3.0'
 gem "font-awesome-rails"
 gem "kaminari" # for pagination
 gem 'chosen-rails'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'rails-controller-testing'
