@@ -18,7 +18,8 @@ skip_before_action :verify_authenticity_token
   end
 
   def authenticate_user!
-    head :unauthorized unless current_user.present?
+    # head :unauthorized unless current_user.present?
+    head :unauthorized unless user_signed_in?
   end
 
 end
