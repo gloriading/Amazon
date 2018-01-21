@@ -169,7 +169,7 @@
             <% end %>
 
 <%# --VOTE a review ----------------------------------------------------------%>
-<% if can?(:review_vote, review) %>
+<% if can?(:review_vote, review) && user_signed_in? %>
     <% user_review_vote = current_user.review_votes.find_by_review_id(review) %>
     <%= review_vote(user_review_vote, review).html_safe if user_signed_in? %>
   <%else %>
