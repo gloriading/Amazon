@@ -9,10 +9,11 @@
           <%= link_to tag.name, tag_path(tag) %>
         <% end %>
       </small>
-
+    <% if @product.image.url %>
       <%= image_tag @product.image.url(:thumb) %>
-    <%= image_tag @product.image.url(:medium) %>
-    <%= image_tag @product.image.url(:large) %>
+      <%= image_tag @product.image.url(:medium) %>
+      <%= image_tag @product.image.url(:large) %>
+    <% end %>
 <%# -----------------------------------------------------------------%>
       <h6 class="card-subtitle mb-2 text-muted"><small>
         updated: <%= time_ago_in_words(@product.updated_at) %> ago

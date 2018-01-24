@@ -1,7 +1,7 @@
 
 <div class="container mt-3 p-3 w-75 form-shape">
 
-  <%= form_for :session, url: session_path do |f| %>
+  <%= simple_form_for :session, url: session_path do |f| %>
 
     <div>
       <%= f.email_field :email,
