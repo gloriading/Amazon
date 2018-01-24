@@ -3,6 +3,7 @@ PASSWORD = '123'
 Review.destroy_all
 Product.destroy_all
 User.destroy_all
+Tag.destroy_all
 
 # -------------------------------------------------------------------------
 super_user = User.create(
@@ -42,6 +43,13 @@ products = Product.all
 
 puts Cowsay.say("Created #{Product.count} products", :ghostbusters)
 
+# TAG--------------------------------------------------------------------------
+['Arts', 'Sports', 'News', 'Cats', 'Cartoons', 'Lifestyle', 'Tech'].each do |tag_name|
+  Tag.create(name: tag_name)
+end
+
+tags = Tag.all
+puts Cowsay.say("Created #{Tag.count} tags", :cow)
 # -------------------------------------------------------------------------
 products.each do |product|
   rand(1..5).times.each do

@@ -83,7 +83,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-
+    @product.slug = nil
     if @product.update(product_params)
       redirect_to product_path(@product)
     else
@@ -95,7 +95,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :sale_price, { tag_ids: [] })
+    params.require(:product).permit(:title, :description, :price, :sale_price, :image, { tag_ids: [] })
   end
 
   def find_product

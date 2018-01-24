@@ -36,6 +36,10 @@ gem 'jquery-rails'
 gem 'bootstrap'
 gem 'faraday'
 gem 'rack-cors'
+gem 'simple_form'
+gem 'friendly_id', '~> 5.2.3'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

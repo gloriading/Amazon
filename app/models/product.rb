@@ -25,6 +25,16 @@ class Product < ApplicationRecord
 
   validate :reserved
 
+
+  mount_uploader :image, ImageUploader
+
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history, :finders]
+
+  # def to_param
+  #   "#{id}-#{title}".parameterize
+  # end
+
   def on_sale?
     price > sale_price
   end
