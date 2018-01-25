@@ -40,6 +40,11 @@ gem 'simple_form'
 gem 'friendly_id', '~> 5.2.3'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem 'fog'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'cocoon'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

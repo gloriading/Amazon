@@ -1,0 +1,5 @@
+class Survey < ApplicationRecord
+  validates :body, presence: true
+  has_many :options, dependent: :destroy
+  accepts_nested_attributes_for :options, reject_if: :all_blank, allow_destroy: true
+end

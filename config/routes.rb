@@ -67,10 +67,5 @@ Rails.application.routes.draw do
   # product_lists related route
   resource :product_lists, only: [:show]
 
-
-  # note: this is from Brett
-  # resource :reviews, only: [] do
-  #   patch :hide
-  # end
-
+  resources :surveys, only: [:new, :create]
 end

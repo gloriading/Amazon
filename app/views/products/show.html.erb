@@ -9,21 +9,28 @@
           <%= link_to tag.name, tag_path(tag) %>
         <% end %>
       </small>
-    <% if @product.image.url %>
-      <%= image_tag @product.image.url(:thumb) %>
-      <%= image_tag @product.image.url(:medium) %>
-      <%= image_tag @product.image.url(:large) %>
-    <% end %>
 <%# -----------------------------------------------------------------%>
       <h6 class="card-subtitle mb-2 text-muted"><small>
         updated: <%= time_ago_in_words(@product.updated_at) %> ago
       </small></h6>
     </div>
     <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted text-right">By:
-        <%= @product.user&.full_name || "[deleted]" %>
-      </h6>
+      <p>By
+        <% if @product.user %>
+          <%= link_to @product.user.full_name, user_path(@product.user) %>
+        <% else %>
+          <%= '[deleted]' %>
+        <% end %>
+      </p>
+
       <p class="card-text"><%= @product.description %></p>
+<%#---------------------------------------------------------------IMAGE--------%>
+      <% if @product.image.present? %>
+        <%= image_tag @product.image.url(:thumb) %>
+        <%= image_tag @product.image.url(:medium) %>
+        <%= image_tag @product.image.url(:large) %>
+      <% end %>
+<%#------------------------------------------------------------------------------%>
       <p class="card-text text-secondary ">
         $ <%= @product.price %>
         <% if @product.on_sale? %>

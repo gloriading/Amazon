@@ -23,6 +23,12 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
 
+  geocoded_by :address
+  after_validation :geocode
+
+  extend FriendlyId
+  friendly_id :full_name, use: [:slugged, :history, :finders]
+
   def full_name
     "#{first_name} #{last_name}"
   end

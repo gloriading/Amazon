@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124011354) do
+ActiveRecord::Schema.define(version: 20180125022805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 20180124011354) do
     t.index ["user_id"], name: "index_loves_on_user_id"
   end
 
+  create_table "options", force: :cascade do |t|
+    t.bigint "survey_id"
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_options_on_survey_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -105,6 +113,12 @@ ActiveRecord::Schema.define(version: 20180124011354) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "tag_id"
@@ -129,8 +143,13 @@ ActiveRecord::Schema.define(version: 20180124011354) do
     t.datetime "updated_at", null: false
     t.boolean "is_admin", default: false
     t.string "api_key"
+    t.string "address"
+    t.float "longitude"
+    t.float "latitude"
+    t.string "slug"
     t.index ["api_key"], name: "index_users_on_api_key"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
@@ -149,6 +168,7 @@ ActiveRecord::Schema.define(version: 20180124011354) do
   add_foreign_key "likes", "users"
   add_foreign_key "loves", "reviews"
   add_foreign_key "loves", "users"
+  add_foreign_key "options", "surveys"
   add_foreign_key "products", "users"
   add_foreign_key "review_votes", "reviews"
   add_foreign_key "review_votes", "users"

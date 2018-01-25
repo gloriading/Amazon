@@ -81,6 +81,21 @@ before_action :authenticate_user!, only: [:edit, :update, :edit_password, :updat
 
   end
 
+  def show
+    @user = User.find params[:id]
+  end
+
+  def index
+  if user_signed_in? && current_user.longitude
+    users = User.near([current_user.latitude, current_user.longitude], 5)
+    @hash = Gmaps4rails.build_markers(users) do |user, marker| 
+      marker.lat user.latitude
+      marker.lng user.longitude
+      marker.infowindow user.full_name
+    end
+  end
+end
+
 
 private
 
@@ -89,6 +104,7 @@ private
       :first_name,
       :last_name,
       :email,
+      :address,
       :password,
       :password_confirmation
     )
