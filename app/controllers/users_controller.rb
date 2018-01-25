@@ -11,6 +11,10 @@ before_action :authenticate_user!, only: [:edit, :update, :edit_password, :updat
     if @user.save
       session[:user_id] = @user.id # for user sign in/out
       # (Then go to  ApplicationController )
+
+      user_ip = request.remote_ip
+      Location.create(ip: user_ip, user: @user)
+
       flash[:notice] = "Thank you for signing up, #{@user.first_name}!"
       # (Then go to layout/application.html.erb)
       redirect_to home_path
@@ -88,7 +92,7 @@ before_action :authenticate_user!, only: [:edit, :update, :edit_password, :updat
   def index
   if user_signed_in? && current_user.longitude
     users = User.near([current_user.latitude, current_user.longitude], 5)
-    @hash = Gmaps4rails.build_markers(users) do |user, marker| 
+    @hash = Gmaps4rails.build_markers(users) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
       marker.infowindow user.full_name

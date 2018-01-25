@@ -1,6 +1,21 @@
 <div class="container">
 
   <h3 class="mt-2 text-center">Admin Dashboard</h3>
+  
+  <% if @hash %>
+    <div style='width: 800px;'>
+      <div id="map" style='width: 1000px; height: 500px;'></div>
+    </div>
+
+    <script type="text/javascript">
+      handler = Gmaps.build('Google');
+      handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+    </script>
+   <% end %>
 
   <h5>Statistics:</h5>
   <div class="row text-center border border-dark">

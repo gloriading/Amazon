@@ -4,6 +4,7 @@ Review.destroy_all
 Product.destroy_all
 User.destroy_all
 Tag.destroy_all
+Location.destroy_all
 
 # -------------------------------------------------------------------------
 super_user = User.create(
@@ -30,6 +31,17 @@ users = User.all
 puts Cowsay.say("Create #{users.count} users", :tux)
 # -------------------------------------------------------------------------
 
+ 15.times do
+   Location.create(
+     ip: Array.new(4){rand(256)}.join('.'),
+     user: users.sample
+   )
+ end
+
+ locations = Location.all
+ puts Cowsay.say("Created #{locations.count} locations", :stegosaurus)
+
+# -------------------------------------------------------------------------
 100.times do
   Product.create(
     title: Faker::Dessert.variety,
