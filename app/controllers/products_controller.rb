@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
 #---new product form ----------------------------------------------------------
   def new
     @product = Product.new
+    @product.faqs.build
   end
 
   def create
@@ -37,6 +38,8 @@ class ProductsController < ApplicationController
     @user_like = current_user.likes.find_by_product_id(@product) if user_signed_in?
     @user_favourite = current_user.favourites.find_by_product_id(@product) if user_signed_in?
     @user_vote = current_user.votes.find_by_product_id(@product) if user_signed_in?
+
+    @faqs = @product.faqs
   end
 
 #---product index---------------------------------------------------------------
@@ -95,7 +98,14 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :sale_price, :image, { tag_ids: [] })
+    params.require(:product).permit(
+      :title,
+      :description,
+      :price,
+      :sale_price,
+      :image, { tag_ids: [] },
+      { faqs_attributes: [:question, :answer, :id, :_destroy] }
+    )
   end
 
   def find_product

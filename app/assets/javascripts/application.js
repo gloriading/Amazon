@@ -19,3 +19,14 @@
 //= require gmaps/google
 //= require cocoon
 //= require_tree .
+
+
+let counter = 1;
+$('.add_fields').on('click', function(){
+    counter ++;
+    console.log(counter);
+  if(counter>=5){
+    $('.add_fields').hide();
+    alert('too many......stop!!!!');
+  }
+});

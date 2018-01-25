@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125022805) do
+ActiveRecord::Schema.define(version: 20180125183538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20180125022805) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "faqs", force: :cascade do |t|
+    t.string "question"
+    t.string "answer"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_faqs_on_product_id"
   end
 
   create_table "favourites", force: :cascade do |t|
@@ -162,6 +171,7 @@ ActiveRecord::Schema.define(version: 20180125022805) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "faqs", "products"
   add_foreign_key "favourites", "products"
   add_foreign_key "favourites", "users"
   add_foreign_key "likes", "products"

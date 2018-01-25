@@ -81,6 +81,14 @@
         <p class="text-right">
         <%= product_vote(@user_vote, @product).html_safe if user_signed_in? %>
         </p>
+<%# FAQ ---------------------------------------------------------------%>
+        <% if @faqs.present? %>
+        <h5>FAQs:</h5>
+          <% @faqs.each do |f| %>
+            <p> Question: <%= f.question %></p>
+            <p> Answer: <%= f.answer %></p>
+          <% end %>
+        <% end %>
     </div>
   </div>
 <%# --------------------------------------------------------------------%>

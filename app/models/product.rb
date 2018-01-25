@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  has_many :faqs
+  accepts_nested_attributes_for :faqs, reject_if: :all_blank, allow_destroy: true
+  
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 

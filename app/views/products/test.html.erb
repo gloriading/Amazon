@@ -1,0 +1,57 @@
+
+<%= simple_form_for @product, html: {class: "form-group"} do |form| %>
+
+  <% if @product.errors.present? %>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+       <%= @product.errors.full_messages.join(', ') %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+
+  <%= form.input :image, input_html: {class: 'w-80'}, label_html: {class: 'mr-3'} %>
+
+  <div class="input-group mb-1">
+      <%= form.label :product, class: "input-group-addon", style: "width:100px;" %>
+      <%= form.text_field :title, class: "form-control", required: "required" %>
+  </div>
+  <div class="mb-1">
+      <%= form.collection_select(
+        :tag_ids,
+        Tag.order(:name),
+        :id,
+        :name,
+        {},
+        {
+          multiple: true,
+          class: 'form-control chosen-select'
+        }
+      ) %>
+  </div>
+
+  <div class="input-group mb-1">
+    <%= form.label :description, class: "input-group-addon", style: "width:100px;" %>
+    <%= form.text_area :description, class: "form-control", rows: "6", required: "required" %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group">
+        <%= form.label :price, class: "input-group-addon", style: "width:100px;" %>
+        <%= form.number_field :price, min: 1.0, step: :any, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group">
+        <%= form.label :sale_price, class: "input-group-addon", style: "width:100px;" %>
+        <%= form.number_field :sale_price, min: 1.0, step: :any, class: "form-control" %>
+        <span class="input-group-btn">
+        <%= form.submit "Submit", class:"btn btn-secondary btn-sm" %>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+<% end %>
