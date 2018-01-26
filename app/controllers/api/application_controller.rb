@@ -7,9 +7,25 @@ skip_before_action :verify_authenticity_token
   end
   helper_method :user_signed_in?
 
+
   def current_user
-    @user ||= User.find_by(api_key: api_key) if api_key.present?
-  end
+     token_type, token = request.headers["AUTHORIZATION"]&.split(" ") || []
+
+     case token_type&.downcase
+     when 'api_key'
+       @user ||= User.find_by(api_key: token)
+     when 'jwt'
+       begin
+         payload = JWT.decode(
+           token,
+           Rails.application.secrets.secret_key_base
+         )&.first
+         @user ||= User.find(payload["id"])
+       rescue JWT::DecodeError => error
+         nil
+       end
+     end
+   end
   helper_method :current_user
 
   private
