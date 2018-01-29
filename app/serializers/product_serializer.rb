@@ -1,5 +1,5 @@
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :price, :sale_price, :created_date, :updated_date, :like_count, :tag_name,
+  attributes :id, :title, :description, :price, :sale_price, :created_date, :updated_date, :like_count, :tag_name, 
 
   def created_date
     object.created_at.to_formatted_s(:db)
