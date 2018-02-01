@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :locations, dependent: :destroy
-  
+
   has_many :products, dependent: :nullify
   has_many :reviews, dependent: :nullify
 
@@ -37,6 +37,16 @@ class User < ApplicationRecord
   end
 
   before_create :generate_api_key
+
+  def to_props
+     ActiveRecord::Base.include_root_in_json = true
+     json = to_json(
+       only: [:id, :first_name, :last_name],
+       methods: [:full_name]
+     )
+     ActiveRecord::Base.include_root_in_json = false
+     json
+   end
 
   private
 

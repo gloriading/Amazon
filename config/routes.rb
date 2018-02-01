@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :products
       resources :tokens, only: [:create]
     end
+    match '*unmatched_route', to: 'application#not_found', via: :all
   end
 
   match "/delayed_job", to: DelayedJobWeb, anchor: false, via: [:get, :post]

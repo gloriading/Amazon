@@ -46,6 +46,7 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'cocoon'
 gem 'jwt'
+gem 'webpacker', '~>3.0.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

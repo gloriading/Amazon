@@ -22,12 +22,17 @@ class Api::V1::ProductsController < Api::ApplicationController
       # Here we don't apply before_action so no need to use @
       product = Product.new product_params
       product.user = current_user
-      if product.save
-        render json: { id: product.id }
-        # render json: product # show all the info of this product
-      else
-        render json: { error: product.errors.full_messages}
-      end
+
+
+      # if product.save
+      #   render json: { id: product.id }
+      #   # render json: product # show all the info of this product
+      # else
+      #   render json: { error: product.errors.full_messages}
+      # end
+
+      product.save!
+      render json: { id: product.id }
 
     end
 

@@ -11,10 +11,20 @@
 
 
     <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <%=
+        tag.div(
+          id: "Navigation",
+          data: {
+            props: current_user&.to_props || "{}"
+          }
+        )
+      %>
+
+    <!-- <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/">Amazon </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -84,7 +94,7 @@
           <% end %>
         </ul>
       </div>
-    </nav>
+    </nav> -->
 
 
       <div class="container-fluid">
