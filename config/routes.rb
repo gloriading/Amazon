@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-
+  match '/client', to: "client#index", via: :all
+  match '/client/*path', to: "client#index", via: :all
+  
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :users
