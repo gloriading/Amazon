@@ -1,5 +1,6 @@
 import {ready, qS} from '../utilities';
 
 ready(()=>{
-  console.log('YOoooooooo!!!');
+  console.log('YOo!!!');
+  
 });

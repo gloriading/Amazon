@@ -9,12 +9,20 @@
 
 // console.log('Hello World from Webpacker')
 
-import React from 'react';
+ import React from 'react';
  import ReactDOM from 'react-dom';
  import {Navigation} from '../components/Navigation';
  import {ready, qS} from '../utilities';
+ import tippy from 'tippy.js';
 
  ready(() => {
+   
+  tippy('.card-body h4', {
+          placement: 'right',
+          animation: 'scale',
+          duration: 1000,
+          arrow: true
+        });
 
  const navigationDiv = qS('#Navigation');
  const props = JSON.parse(navigationDiv.dataset.props);
@@ -24,4 +32,5 @@ import React from 'react';
      <Navigation {...props} />,
       navigationDiv
    );
+
  });

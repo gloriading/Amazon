@@ -11,12 +11,14 @@
 
   <p class="text-right"><small><em>Total products: <%= @products_count %> </em></small></p>
 
+
+
   <div class="row mt-3">
   <% @products.each do |product| %>
     <div class="col-md-4 card my-1 p-0">
       <img class="card-img-top" src="https://images.pexels.com/photos/132694/pexels-photo-132694.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" >
       <div class="card-body">
-        <h4><%= link_to product.title, product_path(product), class: "card-title text-dark no-t-dec"%></h4>
+        <h4 title="<%= product.description%>"><%= link_to product.title, product_path(product), class: "card-title text-dark no-t-dec"%></h4>
         <p class="text-right"><small>updated at:<%= time_ago_in_words(product.updated_at) %> ago</small></p>
         <p class="card-text">
           <% if product.description.split(' ').length < 20 %>
