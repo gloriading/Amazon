@@ -55,12 +55,12 @@
             <%= link_to 'Tags', tags_path, class:"nav-link"  %>
           </li>
         </ul>
-        <%= form_tag search_products_path, method: "get", class: "mt-2" do %>
+        <%#= form_tag search_products_path, method: "get", class: "mt-2" do %>
           <p>
-            <%= text_field_tag :search, params[:search], class: "form-control-sm mr-sm-2", style:"border:none;" %>
-            <%= submit_tag "Go", :name => nil, class: "btn btn-secondary btn-sm my-0 my-sm-0 mr-2", style: "border:none" %>
+            <%#= text_field_tag :search, params[:search], class: "form-control-sm mr-sm-2", style:"border:none;" %>
+            <%#= submit_tag "Go", :name => nil, class: "btn btn-secondary btn-sm my-0 my-sm-0 mr-2", style: "border:none" %>
           </p>
-        <% end %>
+        <%# end %>
 
         <ul class="navbar-nav">
           <% if user_signed_in? %>

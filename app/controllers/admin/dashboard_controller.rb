@@ -8,7 +8,7 @@ class Admin::DashboardController < ApplicationController
     @number_of_reviews = Review.count
     @number_of_users = User.count
     @products = Product.order(created_at: :desc)
-    
+
     locations = Location.all
     @hash = Gmaps4rails.build_markers(locations) do |location, marker|
       marker.lat location.latitude

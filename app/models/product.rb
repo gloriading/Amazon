@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_many :faqs
   accepts_nested_attributes_for :faqs, reject_if: :all_blank, allow_destroy: true
-  
+
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
@@ -43,17 +43,17 @@ class Product < ApplicationRecord
   end
 # ----------------------------------------------------------------------lab
 # My solution: class method
-  scope :search, -> (key) {
+  scope :search_it, -> (key) {
     where("title ILIKE '%#{key}%' or description ILIKE '%#{key}%'")
   }
 
 # Max: class method
-  # def self.search(key)
+  # def self.search_it(key)
   #   where("title ILIKE '%#{key}%' or description ILIKE '%#{key}%'")
   # end
 
 # from MAX ---------------------------------------------------------------lab
-  # def self.search(word)
+  # def self.search_it(word)
   #   # all of the titles that contain `word`
   #   titles = where 'title ILIKE ?', "%#{word}%"
   #

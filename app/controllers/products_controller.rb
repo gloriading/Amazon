@@ -70,7 +70,7 @@ class ProductsController < ApplicationController
 
 #---search posts by title or body -------------------------------------------
   def search
-    @search_results = Product.search(params[:search]) if params[:search].present?
+    @search_results = Product.search_it(params[:search_it]) if params[:search_it].present?
   end
 
 #---delete a product -----------------------------------------------------------

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   match '/client', to: "client#index", via: :all
   match '/client/*path', to: "client#index", via: :all
-  
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :users
@@ -45,7 +47,7 @@ Rails.application.routes.draw do
       resources :likes, only: [:create, :destroy], shallow: true
       resources :favourites, only: [:create, :destroy], shallow: true
       collection do
-        get :search
+        get :search_it
       end
       resources :votes, only: [:create, :update, :destroy], shallow: true
   end

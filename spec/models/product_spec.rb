@@ -91,34 +91,34 @@ RSpec.describe Product, type: :model do
 
   end
 
-  describe 'search products by description' do
-
-    it 'search for a product by description' do
-    user = User.create(first_name: 'Jon', last_name: 'Snow',  email: 'j@s.com', password: 'supersecret')
-    p1 = Product.create!(title:'unique_title1', description: 'blah blah blah blah', price: 10, user: user)
-    p2 = Product.create!(title:'unique_title2', description: 'argh argh argh argh', price: 10, user: user)
-
-    # result = Product.search('blah').size
-    # expect(result).to eq(1)
-    result1 = Product.search('blah').first.id
-    expect(result1).to eq(p1.id)
-    end
-
-  end
-
-  describe 'search products by title' do
-
-    it 'search for a product by title' do
-    user = User.create(first_name: 'Jon', last_name: 'Snow',  email: 'j@s.com', password: 'supersecret')
-    p1 = Product.create!(title:'unique_title1', description: 'blah blah blah blah', price: 10, user: user)
-    p2 = Product.create!(title:'unique_title2', description: 'argh argh argh argh', price: 10, user: user)
-
-    # result = Product.search('unique_title1').size
-    # expect(result).to eq(1)
-    result1 = Product.search('unique_title1').first.id
-    expect(result1).to eq(p1.id)
-    end
-
-  end
+  # describe 'search products by description' do
+  #
+  #   it 'search for a product by description' do
+  #   user = User.create(first_name: 'Jon', last_name: 'Snow',  email: 'j@s.com', password: 'supersecret')
+  #   p1 = Product.create!(title:'unique_title1', description: 'blah blah blah blah', price: 10, user: user)
+  #   p2 = Product.create!(title:'unique_title2', description: 'argh argh argh argh', price: 10, user: user)
+  #
+  #   # result = Product.search('blah').size
+  #   # expect(result).to eq(1)
+  #   result1 = Product.search('blah').first.id
+  #   expect(result1).to eq(p1.id)
+  #   end
+  #
+  # end
+  #
+  # describe 'search products by title' do
+  #
+  #   it 'search for a product by title' do
+  #   user = User.create(first_name: 'Jon', last_name: 'Snow',  email: 'j@s.com', password: 'supersecret')
+  #   p1 = Product.create!(title:'unique_title1', description: 'blah blah blah blah', price: 10, user: user)
+  #   p2 = Product.create!(title:'unique_title2', description: 'argh argh argh argh', price: 10, user: user)
+  #
+  #   # result = Product.search('unique_title1').size
+  #   # expect(result).to eq(1)
+  #   result1 = Product.search('unique_title1').first.id
+  #   expect(result1).to eq(p1.id)
+  #   end
+  #
+  # end
 
 end

@@ -47,6 +47,8 @@ gem 'underscore-rails'
 gem 'cocoon'
 gem 'jwt'
 gem 'webpacker', '~>3.0.0'
+gem 'devise'
+gem 'activeadmin'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
