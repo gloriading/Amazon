@@ -49,6 +49,7 @@ gem 'jwt'
 gem 'webpacker', '~>3.0.0'
 gem 'devise'
 gem 'activeadmin'
+gem 'omniauth-github'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

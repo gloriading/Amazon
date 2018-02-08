@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+
+  get "/auth/github", as: :sign_in_with_github
+  get "/auth/:provider/callback", to: "callbacks#index"
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   match '/client', to: "client#index", via: :all
   match '/client/*path', to: "client#index", via: :all
 

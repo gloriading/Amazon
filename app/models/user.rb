@@ -21,10 +21,42 @@ class User < ApplicationRecord
 
   has_secure_password
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, uniqueness: true, format: VALID_EMAIL_REGEX
-  validates :first_name, :last_name, presence: true
 
+  validates :email,
+    presence: true,
+    uniqueness: true,
+    format: VALID_EMAIL_REGEX,
+    unless: :from_oauth?
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true, unless: :from_oauth?
+
+  serialize :oauth_raw_data
+
+  def self.create_from_oauth(oauth_data)
+    first_name, last_name = oauth_data["info"]["name"]&.split || [oauth_data["info"]["nickname"]]
+
+    User.create(
+      uid: oauth_data["uid"],
+      provider: oauth_data["provider"],
+      first_name: first_name,
+      last_name: last_name,
+      oauth_token: oauth_data["credentials"]["token"],
+      oauth_raw_data: oauth_data,
+      password: SecureRandom.hex(32)
+    )
+  end
+
+  def from_oauth?
+    uid.present? && provider.present?
+  end
+
+  def self.find_by_oauth(oauth_data)
+    self.find_by(
+      provider: oauth_data["provider"],
+      uid: oauth_data["uid"]
+    )
+  end
 
   geocoded_by :address
   after_validation :geocode

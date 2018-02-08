@@ -42,6 +42,9 @@ import React, {Component} from 'react';
       ]);
     } else {
       return ([
+        <NavItem key="0">
+          <NavLink href="/auth/github">Sign In with GitHub</NavLink>
+        </NavItem>,
         <NavItem key="1">
           <NavLink href="/session/new">Sign In</NavLink>
         </NavItem>,
@@ -73,7 +76,7 @@ import React, {Component} from 'react';
              <NavItem>
                <NavLink href="/products">Products</NavLink>
              </NavItem>
-             
+
               { this._renderUserNavItems() }
            </Nav>
          </Collapse>
